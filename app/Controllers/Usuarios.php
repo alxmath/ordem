@@ -8,13 +8,15 @@ class Usuarios extends BaseController
 {
     private $usuarioModel;
 
-    private function __construct()
+    public function __construct()
     {
         $this->usuarioModel = new \App\Models\UsuarioModel();
     }
 
     public function index()
     {
-        
+        $data = ['titulo' => 'Listando os usuários do sistema'];
+
+        return view('Usuarios/index', $data);
     }
 }

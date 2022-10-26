@@ -227,8 +227,10 @@
 
       <section class="no-padding-top no-padding-bottom">
 
-        <!-- Espaço reservado para renderizar o conteúdo de cada view e estender este layout -->
-        <?php echo $this->renderSection('conteudo'); ?>
+        <div class="container-fluid">
+          <!-- Espaço reservado para renderizar o conteúdo de cada view e estender este layout -->
+          <?php echo $this->renderSection('conteudo'); ?>
+        </div>
 
       </section>
 
