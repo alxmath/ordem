@@ -14,7 +14,7 @@
 </div>
 
 <div class="form-group">
-    <label class="form-control-label">Confirmarção de Senha</label>
+    <label class="form-control-label">Confirmação de Senha</label>
     <input type="password" name="password_confirmation" placeholder="Confirme a senha de acesso" class="form-control">
 </div>
 

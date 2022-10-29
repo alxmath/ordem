@@ -26,8 +26,8 @@
         <?php echo $this->include('Usuarios/_form'); ?>
 
         <div class="form-group mt-5 mb-2">
-          <input type="submit" id="btn-salvar" value="Salvar" class="btn btn-danger mr-2">
-          <a href="<?php echo site_url("usuarios/exibir/$usuario->id") ?>" class="btn btn-secondary ml-2">Voltar</a>
+          <input type="submit" id="btn-salvar" value="Salvar" class="btn btn-danger btn-sm mr-2">
+          <a href="<?php echo site_url("usuarios/exibir/$usuario->id") ?>" class="btn btn-secondary btn-sm ml-2">Voltar</a>
         </div>
 
         <?php echo form_close(); ?>
@@ -42,5 +42,54 @@
 <?= $this->endsection() ?>
 
 <?= $this->section('scripts') ?>
-<!-- Aqui coloco os scripts da view -->
+
+<script>
+
+$(document).ready(function() {
+
+  $('#form').on('submit', function(e) {
+
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: '<?php echo site_url('usuarios/atualizar'); ?>',
+      data: new FormData(this),
+      dataType: false,
+      contentType: false,
+      cache: false,
+      processData: false,
+      beforeSend: function () {
+        $("#response").html('');
+        $("#btn-salvar").val('Por favor, aguarde...');
+      },
+      success: function (response) {
+        $("#btn-salvar").val('Salvar');
+        $("#btn-salvar").removeAttr('disabled');
+
+        if (!response.erro) {
+          $('[name=csrf_ordem]').val(response.token);
+
+          if (response.info) {
+            $("#response").html('<div class="alert alert-info">'+ response.info + '</div>');
+          }
+        }else{
+          // exitem erros de validação
+        }
+
+
+      },
+      error: function() {
+        alert('Não foi possível processar a solicitação. Por favor, entre em contato com o suporte técnico.');
+        $("#btn-salvar").val('Salvar');
+        $("#btn-salvar").removeAttr('disabled');
+      }
+    });
+
+  });
+
+});
+
+</script>
+
 <?= $this->endsection() ?>
