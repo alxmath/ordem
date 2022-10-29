@@ -67,14 +67,21 @@ $(document).ready(function() {
         $("#btn-salvar").val('Salvar');
         $("#btn-salvar").removeAttr('disabled');
 
+        $('[name=csrf_ordem]').val(response.token);
+
         if (!response.erro) {
-          $('[name=csrf_ordem]').val(response.token);
 
           if (response.info) {
             $("#response").html('<div class="alert alert-info">'+ response.info + '</div>');
           }
+          else{
+            // Tudo certo com a atualização do usuário
+            // Podemos agora redirecioná-lo tranquilamente
+            window.location.href = "<?php echo site_url("usuarios/exibir/$usuario->id"); ?>";
+          }
         }else{
           // exitem erros de validação
+          $("#response").html('<div class="alert alert-danger">'+ response.erro + '</div>');
         }
 
 

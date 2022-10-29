@@ -78,7 +78,7 @@ class Usuarios extends BaseController
 
         $retorno['token'] = csrf_hash();
 
-        // $retorno['info'] = "Essa é uma mensagem de informação";
+        $retorno['erro'] = "Essa é uma mensagem de erro de validação";
 
         return $this->response->setJSON($retorno);
 
