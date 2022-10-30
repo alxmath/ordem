@@ -82,8 +82,13 @@ $(document).ready(function() {
         }else{
           // exitem erros de validação
           $("#response").html('<div class="alert alert-danger">'+ response.erro + '</div>');
-        }
 
+          if (response.erros_model) {
+            $.each(response.erros_model, function(key, value) {
+              $("#response").append('<ul class="list-unstyled"><li class="text-danger">' + value + '</li></ul>');
+            });
+          }
+        }
 
       },
       error: function() {
@@ -95,6 +100,10 @@ $(document).ready(function() {
 
   });
 
+});
+
+$('#form').submit(function(){
+  $(this).find(":submit").attr('disabled', 'disabled');
 });
 
 </script>
