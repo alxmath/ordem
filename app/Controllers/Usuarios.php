@@ -82,12 +82,16 @@ class Usuarios extends BaseController
         // Recupero o post da requisição
         $post = $this->request->getPost();
 
-        // Esse é um bypass temp
-        unset($post['password']);
-        unset($post['password_confirmation']);
-
         // Validamos a existência do usuário
         $usuario = $this->buscaUsuarioOu404($post['id']);
+
+        // Se não foi informado a senha removemos do $post
+        // Se não fizermos dessa forma o hash_password fará o hash de uma string vazia
+        if (empty($post['password']))
+        {
+            unset($post['password']);
+            unset($post['password_confirmation']);
+        }
 
         // Preenchemos os atributos do usuário com os valores do POST
         $usuario->fill($post);
