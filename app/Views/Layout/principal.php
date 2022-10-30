@@ -228,6 +228,7 @@
       <section class="no-padding-top no-padding-bottom">
 
         <div class="container-fluid">
+          <?php echo $this->include('Layout/_mensagens'); ?>
           <!-- Espaço reservado para renderizar o conteúdo de cada view e estender este layout -->
           <?php echo $this->renderSection('conteudo'); ?>
         </div>

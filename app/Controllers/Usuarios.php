@@ -98,13 +98,13 @@ class Usuarios extends BaseController
 
         if ($usuario->hasChanged() == false)
         {
-            $retorno['info'] = 'Não dados para serem atualizados';
+            $retorno['info'] = 'Não há dados para serem atualizados';
             return $this->response->setJSON($retorno);
         }
 
         if ($this->usuarioModel->protect(false)->save($usuario))
         {
-            // Vamos conhecer mensagens de flash data
+            session()->setFlashdata('sucesso', 'Dados salvos com sucesso!');
 
             return $this->response->setJSON($retorno);
         }
